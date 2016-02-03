@@ -1,5 +1,5 @@
 #include "MainGame.h"
-#include <Engine\Cube.h>
+#include <Engine\Block.h>
 #include <iostream>
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
@@ -35,16 +35,20 @@ void MainGame::gameLoop()
 	Uint32 startTicks(0), endTicks(0), elapsedTime(0);
 
 	Engine::Shader* shader = new Engine::Shader();
-	shader->load();
+
+	std::vector<Engine::Block> blocks;
+
+	for (int i = 0; i < 16; i++) {
+		for (int j = 0; j < 16; j++) {
+			blocks.emplace_back(glm::vec3(i, j, 0), Engine::BlockType::Grass);
+		}
+	}
 
 	//Définition et initialisation des matrices de projection
 	glm::mat4 projection;
 	glm::mat4 modelview;
 	projection = glm::perspective(70.0, 1024.0 / 768.0, 1.0, 100.0);
-	modelview = glm::mat4(1.0);
-
-	Engine::Cube cube(shader, &_textureCache.getTexture("Resources/stone.png"));
-	cube.render();
+	modelview = glm::lookAt(glm::vec3(20, -16, 6), glm::vec3(8, 8, 1), glm::vec3(0, 0, 1));
 
 	//Boucle principale
 	while (_gameState != GameState::EXIT)
@@ -58,10 +62,16 @@ void MainGame::gameLoop()
 		//Nettoyage de l'écran
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		//Placement de la caméra
-		modelview = glm::lookAt(glm::vec3(10, 7, 5), glm::vec3(0, 0, 1), glm::vec3(0, 0, 1));
+		_scene.getShader().use();	
 
-		cube.draw(0, 0, 0, projection, modelview);
+			glUniformMatrix4fv(glGetUniformLocation(_scene.getShader().getProgramID(), "modelview"), 1, GL_FALSE, value_ptr(modelview));
+			glUniformMatrix4fv(glGetUniformLocation(_scene.getShader().getProgramID(), "projection"), 1, GL_FALSE, value_ptr(projection));
+
+			for (auto block:blocks) {
+				block.draw();
+			}
+
+		_scene.getShader().unuse();
 
 		//Actualisation de la fenêtre
 		SDL_GL_SwapWindow(_scene.getWindow());

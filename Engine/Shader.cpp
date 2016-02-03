@@ -21,7 +21,7 @@ namespace Engine
 	void Shader::use()
 	{
 		glUseProgram(_programID);
-		for (int i = 0; i < _numAttributes-1; i++) {
+		for (int i = 0; i < _numAttributes; i++) {
 			glEnableVertexAttribArray(i);
 		}
 	}
@@ -29,7 +29,7 @@ namespace Engine
 	void Shader::unuse()
 	{
 		glUseProgram(0);
-		for (int i = 0; i < _numAttributes-1; i++) {
+		for (int i = 0; i < _numAttributes; i++) {
 			glDisableVertexAttribArray(i);
 		}
 	}
@@ -45,10 +45,9 @@ namespace Engine
 		if (glIsProgram(_programID) == GL_TRUE)
 			glDeleteProgram(_programID);
 
-		compileShaders("Shaders/couleur3D.vert", "Shaders/couleur3D.frag");
+		compileShaders("Shaders/texture.vert", "Shaders/texture.frag");
 		
 		addAttribute("in_Vertex");
-		addAttribute("in_Color");
 		addAttribute("in_TexCoord0");
 
 		linkShaders();

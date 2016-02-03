@@ -22,7 +22,6 @@ public:
 private:
 	Engine::Scene _scene;
 	Engine::InputManager _inputManager;
-	Engine::TextureCache _textureCache;
 	GameState _gameState;
 
 	void gameLoop();
