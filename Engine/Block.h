@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Sprite.h"
-#include "TextureCache.h"
+#include <glm\glm.hpp>
 
 namespace Engine
 {
@@ -15,20 +15,19 @@ namespace Engine
 	class Block
 	{
 	public:
-		Block() { };
+		Block() {};
 		Block(glm::vec3 position, BlockType blocktype);
 		~Block();
 
-		void draw();
-
-		Sprite back;
-		Sprite front;
-		Sprite right;
-		Sprite left;
-		Sprite up;
-		Sprite bottom;
+		Sprite * back;
+		Sprite * front;
+		Sprite * right;
+		Sprite * left;
+		Sprite * up;
+		Sprite * bottom;
 
 		BlockType blockType;
+		ColorRGBA color;
 	};
 }
 

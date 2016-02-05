@@ -12,25 +12,27 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Block.h" />
-    <ClInclude Include="Cube.h" />
+    <ClInclude Include="Chunk.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="picoPNG.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="Structure.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureCache.h" />
+    <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Block.cpp" />
-    <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="Chunk.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="picoPNG.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="Structure.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureCache.cpp" />
   </ItemGroup>

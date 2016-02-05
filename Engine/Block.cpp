@@ -1,77 +1,66 @@
 #include "Block.h"
-#include "Texture.h"
 #include "ResourceManager.h"
+#include "Chunk.h"
+
+const std::string TEXTURE_PATH_STONE = "Resources/grey.png";
+const std::string TEXTURE_PATH_GRASS = "Resources/green.png";
+const std::string TEXTURE_PATH_WATER = "Resources/blue.png";
+const std::string TEXTURE_PATH_EARTH = "Resources/brown.png";
 
 namespace Engine
 {
 	Block::Block(glm::vec3 position, BlockType blocktype) :
 		blockType(blocktype)
 	{
-		up.vertices = { 0 + position.x, 0 + position.y, 1 + position.z,   1 + position.x, 1 + position.y, 1 + position.z,   0 + position.x, 1 + position.y, 1 + position.z,
-						0 + position.x, 0 + position.y, 1 + position.z,   1 + position.x, 1 + position.y, 1 + position.z,   1 + position.x, 0 + position.y, 1 + position.z };
-		up.uv = {0, 0,   1, 1,   0, 1,
-				 0, 0,   1, 1,   1, 0};
-
-		bottom.vertices = { 0 + position.x, 0 + position.y, 0 + position.z,   0 + position.x, 1 + position.y, 0 + position.z,   1 + position.x, 0 + position.y, 0 + position.z,
-							0 + position.x, 1 + position.y, 0 + position.z,   1 + position.x, 0 + position.y, 0 + position.z,   1 + position.x, 1 + position.y, 0 + position.z };
-		bottom.uv = { 0, 0,   1, 0,   0, 1,
-					  1, 0,   0, 1,   1, 1 };
-
-		right.vertices = { 1 + position.x, 1 + position.y, 1 + position.z,   1 + position.x, 0 + position.y, 1 + position.z,   1 + position.x, 1 + position.y, 0 + position.z,
-						   1 + position.x, 0 + position.y, 1 + position.z,   1 + position.x, 1 + position.y, 0 + position.z,   1 + position.x, 0 + position.y, 0 + position.z };
-		right.uv = { 1, 1,   0, 1,   1, 0,
-					 0, 1,   1, 0,   0, 0 };
-
-		left.vertices = { 0 + position.x, 0 + position.y, 1 + position.z,   0 + position.x, 0 + position.y, 0 + position.z,   0 + position.x, 1 + position.y, 1 + position.z,
-						  0 + position.x, 0 + position.y, 0 + position.z,   0 + position.x, 1 + position.y, 1 + position.z,   0 + position.x, 1 + position.y, 0 + position.z };
-		left.uv = { 1, 1,   1, 0,   0, 1,
-					1, 0,   0, 1,   0, 0 };
-
-		front.vertices = { 1 + position.x, 1 + position.y, 1 + position.z,   1 + position.x, 1 + position.y, 0 + position.z,   0 + position.x, 1 + position.y, 1 + position.z,
-						   1 + position.x, 1 + position.y, 0 + position.z,   0 + position.x, 1 + position.y, 1 + position.z,   0 + position.x, 1 + position.y, 0 + position.z };
-		front.uv = { 0, 1,   0, 0,   1, 1,
-					 0, 0,   1, 1,   1, 0 };
-
-		back.vertices = { 0 + position.x, 0 + position.y, 0 + position.z,   1 + position.x, 0 + position.y, 0 + position.z,   1 + position.x, 0 + position.y, 1 + position.z,
-						  0 + position.x, 0 + position.y, 0 + position.z,   0 + position.x, 0 + position.y, 1 + position.z,   1 + position.x, 0 + position.y, 1 + position.z };
-		back.uv = { 0, 0,   0, 1,   1, 1,
-					0, 0,   1, 0,   1, 1 };
+		static int upID;
+		static int otherID;
 
 		if (blockType == BlockType::Stone) {
-			GLuint stoneID = ResourceManager::getTexture("Resources/stone.png").id;
-
-			up.textureID = stoneID;
-			bottom.textureID = stoneID;
-			right.textureID = stoneID;
-			left.textureID = stoneID;
-			front.textureID = stoneID;
-			back.textureID = stoneID;
+			upID = Engine::ResourceManager::getTexture(TEXTURE_PATH_STONE).id;
+			otherID = upID;
+		}
+		else if (blockType == BlockType::Grass) {
+			upID = Engine::ResourceManager::getTexture(TEXTURE_PATH_GRASS).id;
+			otherID = Engine::ResourceManager::getTexture(TEXTURE_PATH_EARTH).id;
+		}
+		else if (blockType == BlockType::Water) {
+			upID = Engine::ResourceManager::getTexture(TEXTURE_PATH_WATER).id;
+			otherID = upID;
 		}
 
-		if (blockType == BlockType::Grass) {
-			GLuint earthID = ResourceManager::getTexture("Resources/earth.png").id;
-			GLuint grassID = ResourceManager::getTexture("Resources/grass.png").id;
-
-			up.textureID = grassID;
-			bottom.textureID = earthID;
-			right.textureID = earthID;
-			left.textureID = earthID;
-			front.textureID = earthID;
-			back.textureID = earthID;
-		}
+		bottom = new Sprite({	glm::vec3(0 + position.x, 0 + position.y, 0 + position.z),
+								glm::vec3(1 + position.x, 0 + position.y, 0 + position.z),
+								glm::vec3(0 + position.x, 1 + position.y, 0 + position.z),
+								glm::vec3(1 + position.x, 1 + position.y, 0 + position.z) },
+								color, { 0, 0, 1, 1 }, otherID);
+		up = new Sprite({		glm::vec3(0 + position.x, 0 + position.y, 1 + position.z),
+								glm::vec3(1 + position.x, 0 + position.y, 1 + position.z),
+								glm::vec3(0 + position.x, 1 + position.y, 1 + position.z),
+								glm::vec3(1 + position.x, 1 + position.y, 1 + position.z) }, 
+								color, { 0, 0, 1, 1 }, upID);
+		back = new Sprite({		glm::vec3(0 + position.x, 0 + position.y, 0 + position.z),
+								glm::vec3(1 + position.x, 0 + position.y, 0 + position.z),
+								glm::vec3(0 + position.x, 0 + position.y, 1 + position.z),
+								glm::vec3(1 + position.x, 0 + position.y, 1 + position.z) },
+								color, { 0, 0, 1, 1 }, otherID);
+		front = new Sprite({	glm::vec3(0 + position.x, 1 + position.y, 0 + position.z),
+								glm::vec3(1 + position.x, 1 + position.y, 0 + position.z),
+								glm::vec3(0 + position.x, 1 + position.y, 1 + position.z),
+								glm::vec3(1 + position.x, 1 + position.y, 1 + position.z) },
+								color, { 0, 0, 1, 1 }, otherID);
+		left = new Sprite({		glm::vec3(0 + position.x, 0 + position.y, 0 + position.z),
+								glm::vec3(0 + position.x, 1 + position.y, 0 + position.z),
+								glm::vec3(0 + position.x, 0 + position.y, 1 + position.z),
+								glm::vec3(0 + position.x, 1 + position.y, 1 + position.z) },
+								color, { 0, 0, 1, 1 }, otherID);
+		right = new Sprite({	glm::vec3(1 + position.x, 0 + position.y, 0 + position.z),
+								glm::vec3(1 + position.x, 1 + position.y, 0 + position.z),
+								glm::vec3(1 + position.x, 0 + position.y, 1 + position.z),
+								glm::vec3(1 + position.x, 1 + position.y, 1 + position.z) },
+								color, { 0, 0, 1, 1 }, otherID);
 	}
 
 	Block::~Block()
 	{
-	}
-
-	void Block::draw()
-	{
-		up.draw();
-		bottom.draw();
-		right.draw();
-		left.draw();
-		front.draw();
-		back.draw();
 	}
 }

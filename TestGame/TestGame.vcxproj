@@ -86,9 +86,25 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="Rock.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainGame.h" />
+    <ClInclude Include="Rock.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\blue.png" />
+    <Image Include="Resources\brown.png" />
+    <Image Include="Resources\earth.png" />
+    <Image Include="Resources\grass.png" />
+    <Image Include="Resources\green.png" />
+    <Image Include="Resources\grey.png" />
+    <Image Include="Resources\stone.png" />
+    <Image Include="Resources\water.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\texture.frag" />
+    <None Include="Shaders\texture.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

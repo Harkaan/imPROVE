@@ -47,8 +47,9 @@ namespace Engine
 
 		compileShaders("Shaders/texture.vert", "Shaders/texture.frag");
 		
-		addAttribute("in_Vertex");
-		addAttribute("in_TexCoord0");
+		addAttribute("v_position");
+		addAttribute("v_color");
+		addAttribute("v_uv");
 
 		linkShaders();
 

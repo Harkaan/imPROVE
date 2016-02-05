@@ -23,7 +23,9 @@ private:
 	Engine::Scene _scene;
 	Engine::InputManager _inputManager;
 	GameState _gameState;
+	float _theta;
 
 	void gameLoop();
 	void processInput();
+	void processBasicCamera();
 };
