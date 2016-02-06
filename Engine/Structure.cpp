@@ -27,4 +27,9 @@ namespace Engine
 			_blocks.push_back(new Block(temp.first + _position, temp.second));
 		}
 	}
+
+	void Structure::clear()
+	{
+		_blocks.clear();
+	}
 }

@@ -12,6 +12,7 @@ namespace Engine
 		~Structure();
 
 		void build();
+		void clear();
 
 		void setPosition(glm::vec3 position) { _position = position; }
 		glm::vec3 getPosition() { return _position; }

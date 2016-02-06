@@ -31,11 +31,12 @@ namespace Engine
 		void render();
 		void build();		
 		void draw();
+		void update();
 	
 	private:
 		glm::vec3 _position;
 		float _heightMap[CHUNK_SIZE * CHUNK_SIZE];
-		
+		bool _isUpToDate;
 		std::vector<Structure*> _structures;
 		std::vector<Block*> _groundBlocks;
 

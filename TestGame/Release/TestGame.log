@@ -1,11 +1,10 @@
-﻿Build started 06/02/2016 00:48:37.
+﻿Build started 06/02/2016 10:40:38.
      1>Project "E:\Dev\GitHub\imPROVE\TestGame\TestGame.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         D:\Visual Studio\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt MainGame.cpp Rock.cpp
+         D:\Visual Studio\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt MainGame.cpp
          MainGame.cpp
-     1>MainGame.cpp(145): warning C4305: '+=' : truncation from 'double' to 'float'
-     1>MainGame.cpp(148): warning C4305: '-=' : truncation from 'double' to 'float'
-         Rock.cpp
+     1>MainGame.cpp(168): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>MainGame.cpp(171): warning C4305: '-=' : truncation from 'double' to 'float'
        Link:
          D:\Visual Studio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Dev\GitHub\imPROVE\Release\TestGame.exe" /INCREMENTAL:NO /NOLOGO SDL2.lib SDL2main.lib opengl32.lib glew32.lib Engine.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\Dev\GitHub\imPROVE\Release\TestGame.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Dev\GitHub\imPROVE\Release\TestGame.lib" /MACHINE:X86 /SAFESEH Release\main.obj
          Release\MainGame.obj
@@ -17,4 +16,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.89
+Time Elapsed 00:00:01.41

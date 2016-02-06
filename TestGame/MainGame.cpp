@@ -41,27 +41,41 @@ void MainGame::gameLoop()
 
 	Engine::Shader* shader = new Engine::Shader();
 
-	float heightmap[CHUNK_SIZE*CHUNK_SIZE] = {  3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-												3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-												3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-												3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-												3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-												3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-												3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-												3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-												3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-												3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-												3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-												3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-												3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-												3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-												3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-												3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3 };
+	float heightmap[CHUNK_SIZE*CHUNK_SIZE] = {  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+												1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+												1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+												1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+												1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+												1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+												1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+												1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+												1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+												1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+												1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+												1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+												1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+												1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+												1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+												1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 
-	Engine::Chunk* chunk = new Engine::Chunk(glm::vec3(0, 0, 0), Engine::BlockType::Grass, heightmap);
+	std::vector<Engine::Chunk*> chunks;
+
+	//Hard test
+	for(int i = 0; i < 16; i++) {
+		for (int j = 0; j < 16; j++) {
+			Engine::Chunk* chunk = new Engine::Chunk(glm::vec3(i*16 , j*16, 0), Engine::BlockType::Grass, heightmap);
+			chunk->addStructure(new Rock(glm::vec3(2, 6, 0)));
+			chunk->addStructure(new Rock(glm::vec3(7, 12, 0)));
+			chunk->init();
+			chunks.emplace_back(chunk);
+		}
+	}
+
+	//Soft test
+	/*Engine::Chunk* chunk = new Engine::Chunk(glm::vec3(0, 0, 0), Engine::BlockType::Grass, heightmap);
 	chunk->addStructure(new Rock(glm::vec3(2, 6, 0)));
 	chunk->addStructure(new Rock(glm::vec3(7, 12, 0)));
-	chunk->init();
+	chunk->init();*/
 
 	//Définition et initialisation des matrices de projection
 	glm::mat4 projection;
@@ -91,11 +105,16 @@ void MainGame::gameLoop()
 			glUniformMatrix4fv(glGetUniformLocation(_scene.getShader().getProgramID(), "modelview"), 1, GL_FALSE, value_ptr(modelview));
 			glUniformMatrix4fv(glGetUniformLocation(_scene.getShader().getProgramID(), "projection"), 1, GL_FALSE, value_ptr(projection));
 
-			chunk->clear();
-			chunk->render();
-			chunk->build();
-			chunk->draw();
+				//Hard test
+				for (auto chunk : chunks) {
+					chunk->update();
+					chunk->draw();
+				}
 
+				//Soft test
+				/*chunk->update();
+				chunk->draw();*/
+			
 		_scene.getShader().unuse();
 
 		//Actualisation de la fenêtre

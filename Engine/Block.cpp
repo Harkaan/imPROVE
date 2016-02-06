@@ -2,10 +2,10 @@
 #include "ResourceManager.h"
 #include "Chunk.h"
 
-const std::string TEXTURE_PATH_STONE = "Resources/grey.png";
-const std::string TEXTURE_PATH_GRASS = "Resources/green.png";
-const std::string TEXTURE_PATH_WATER = "Resources/blue.png";
-const std::string TEXTURE_PATH_EARTH = "Resources/brown.png";
+const std::string TEXTURE_PATH_STONE = "Resources/stone.png";
+const std::string TEXTURE_PATH_GRASS = "Resources/grass.png";
+const std::string TEXTURE_PATH_WATER = "Resources/water.png";
+const std::string TEXTURE_PATH_EARTH = "Resources/earth.png";
 
 namespace Engine
 {

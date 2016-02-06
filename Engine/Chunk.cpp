@@ -5,6 +5,7 @@ namespace Engine
 {
 	Chunk::Chunk(glm::vec3 position, BlockType blocktype, float heightmap[CHUNK_SIZE * CHUNK_SIZE]) :
 		_position(position),
+		_isUpToDate(false),
 		_vbo(0), 
 		_vao(0)
 	{
@@ -64,6 +65,7 @@ namespace Engine
 		}
 
 		for (auto structure : _structures) {
+			structure->clear();
 			structure->build();
 			std::vector<Block *> structBlocks = structure->getBlocks();
 			for (auto block : structBlocks) {
@@ -96,6 +98,17 @@ namespace Engine
 		}
 
 		glBindVertexArray(0);
+	}
+
+	void Chunk::update()
+	{
+		if (!_isUpToDate) {
+			clear();
+			render();
+			build();
+
+			_isUpToDate = true;
+		}
 	}
 
 	void Chunk::createSpriteBatches()
