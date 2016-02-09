@@ -3,6 +3,8 @@
 #include <Engine\Scene.h>
 #include <Engine\Shader.h>
 #include <Engine\InputManager.h>
+#include <Engine\Camera.h>
+#include <Engine\Input.h>
 #include <Engine\TextureCache.h>
 
 enum class GameState {
@@ -24,6 +26,7 @@ private:
 	Engine::InputManager _inputManager;
 	GameState _gameState;
 	float _theta;
+	Engine::Input m_input;
 
 	void gameLoop();
 	void processInput();

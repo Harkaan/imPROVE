@@ -2,6 +2,7 @@
 #include <Engine\Chunk.h>
 #include <Engine\Block.h>
 #include "Rock.h"
+#include "Tree.h"
 #include <vector>
 #include <iostream>
 #include <glm/glm.hpp>
@@ -10,7 +11,7 @@
 
 MainGame::MainGame() :
 	_gameState(GameState::PLAY),
-	_theta(0)
+	_theta(0), m_input()
 {
 }
 
@@ -35,7 +36,8 @@ void MainGame::run()
 // Boucle dans laquelle vit le jeu.
 void MainGame::gameLoop()
 {
-	GLuint frameRate(1000 / 50);
+	glClearColor(0.043, 0.566, 0.848, 1);
+	GLuint frameRate(1000 / 60);
 	Uint32 startTicks(0), endTicks(0), elapsedTime(0), startFpsTicks(0), endFpsTicks(0);
 	int steps(0);
 
@@ -66,6 +68,7 @@ void MainGame::gameLoop()
 			Engine::Chunk* chunk = new Engine::Chunk(glm::vec3(i*16 , j*16, 0), Engine::BlockType::Grass, heightmap);
 			chunk->addStructure(new Rock(glm::vec3(2, 6, 0)));
 			chunk->addStructure(new Rock(glm::vec3(7, 12, 0)));
+			chunk->addStructure(new Tree(glm::vec3(5, 3, 0)));
 			chunk->init();
 			chunks.emplace_back(chunk);
 		}
@@ -80,22 +83,26 @@ void MainGame::gameLoop()
 	//Définition et initialisation des matrices de projection
 	glm::mat4 projection;
 	glm::mat4 modelview;
-	projection = glm::perspective(70.0, 1024.0 / 768.0, 1.0, 100.0);
+	projection = glm::perspective(70.0, 1024.0 / 768.0, 1.0, 1000.0);
+	Engine::FrustrumCulling frustrumCulling(70.0, (double)1024 / 768);
 	modelview = glm::mat4(1.0);
+
+	Engine::Camera camera(glm::vec3(0, 100, 0), glm::vec3(0, 50, 50), glm::vec3(0, 0, 1), 2, 1, &frustrumCulling);
+	m_input.afficherPointeur(false);
+	m_input.capturerPointeur(true);
 
 	startFpsTicks = SDL_GetTicks();
 
 	//Boucle principale
-	while (_gameState != GameState::EXIT)
+	while (!m_input.terminer())
 	{
 		startTicks = SDL_GetTicks();
+		m_input.updateEvenements();
+		if (m_input.getTouche(SDL_SCANCODE_ESCAPE))
+			break;
 		
 		//Gestion des inputs
-		_inputManager.update();
-		processInput();
-		processBasicCamera();
-
-		modelview = glm::lookAt(glm::vec3(8 + 30*cos(_theta), 8 + 30*sin(_theta), 10), glm::vec3(8, 8, 2), glm::vec3(0, 0, 1));
+		camera.deplacer(m_input);
 
 		//Nettoyage de l'écran
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -114,8 +121,10 @@ void MainGame::gameLoop()
 				//Soft test
 				/*chunk->update();
 				chunk->draw();*/
-			
+		
 		_scene.getShader().unuse();
+
+		camera.lookAt(modelview);
 
 		//Actualisation de la fenêtre
 		SDL_GL_SwapWindow(_scene.getWindow());
