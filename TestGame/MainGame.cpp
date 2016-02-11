@@ -63,8 +63,8 @@ void MainGame::gameLoop()
 	std::vector<Engine::Chunk*> chunks;
 
 	//Hard test
-	for(int i = 0; i < 16; i++) {
-		for (int j = 0; j < 16; j++) {
+	for(int i = 0; i < 32; i++) {
+		for (int j = 0; j < 32; j++) {
 			Engine::Chunk* chunk = new Engine::Chunk(glm::vec3(i*16 , j*16, 0), Engine::BlockType::Grass, heightmap);
 			chunk->addStructure(new Rock(glm::vec3(2, 6, 0)));
 			chunk->addStructure(new Rock(glm::vec3(7, 12, 0)));
@@ -83,11 +83,11 @@ void MainGame::gameLoop()
 	//Définition et initialisation des matrices de projection
 	glm::mat4 projection;
 	glm::mat4 modelview;
-	projection = glm::perspective(70.0, 1024.0 / 768.0, 1.0, 1000.0);
+	projection = glm::perspective(70.0, 1024.0 / 768.0, 1.0, 10000.0);
 	Engine::FrustrumCulling frustrumCulling(70.0, (double)1024 / 768);
 	modelview = glm::mat4(1.0);
 
-	Engine::Camera camera(glm::vec3(0, 100, 0), glm::vec3(0, 50, 50), glm::vec3(0, 0, 1), 2, 1, &frustrumCulling);
+	Engine::Camera camera(glm::vec3(0, 10, 0), glm::vec3(0, 5, 5), glm::vec3(0, 0, 1), 2, 0.5, &frustrumCulling);
 	m_input.afficherPointeur(false);
 	m_input.capturerPointeur(true);
 

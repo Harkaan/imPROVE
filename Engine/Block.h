@@ -1,12 +1,14 @@
 #pragma once
 
 #include "Sprite.h"
+#include <vector>
 #include <glm\glm.hpp>
 
 namespace Engine
 {
 	enum class BlockType
 	{
+		Void,
 		Stone,
 		Grass,
 		Water,
@@ -18,15 +20,10 @@ namespace Engine
 	{
 	public:
 		Block() {};
-		Block(glm::vec3 position, BlockType blocktype);
+		Block(glm::vec3 position, bool spritesLoaded[6], BlockType blocktype);
 		~Block();
 
-		Sprite * back;
-		Sprite * front;
-		Sprite * right;
-		Sprite * left;
-		Sprite * up;
-		Sprite * bottom;
+		std::vector<Sprite*> sprites;
 
 		BlockType blockType;
 		ColorRGBA color;

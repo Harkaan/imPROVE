@@ -1,12 +1,15 @@
-﻿Build started 09/02/2016 17:20:37.
+﻿Build started 11/02/2016 18:04:17.
      1>Project "C:\Users\Tiferod\Desktop\ImPROVE\imPROVE\Engine\Engine.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Chunk.cpp
-         Chunk.cpp
-     1>Chunk.cpp(39): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>Chunk.cpp(80): warning C4018: '<' : signed/unsigned mismatch
-     1>Chunk.cpp(92): warning C4018: '<' : signed/unsigned mismatch
-     1>Chunk.cpp(138): warning C4018: '<' : signed/unsigned mismatch
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Structure.cpp
+         Structure.cpp
+     1>Structure.cpp(28): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>Structure.cpp(30): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Structure.cpp(31): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Structure.cpp(32): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Structure.cpp(33): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Structure.cpp(34): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+     1>Structure.cpp(35): warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
        Lib:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"C:\Users\Tiferod\Desktop\ImPROVE\imPROVE\Release\Engine.lib" SDL2.lib SDL2main.lib opengl32.lib glew32.lib /NOLOGO /LTCG Release\Block.obj
          Release\Camera.obj
@@ -28,4 +31,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.10
+Time Elapsed 00:00:01.14
