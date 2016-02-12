@@ -2,13 +2,42 @@
 
 namespace Engine
 {
-	InputManager::InputManager() : 
-		_mouseCoords(0.0f, 0.0f)
+	InputManager::InputManager() :
+		_mouseCoords(0.0f, 0.0f),
+		_mouseMoves(0.0f, 0.0f)
 	{
 	}
 
 	InputManager::~InputManager()
 	{
+	}
+
+	void InputManager::processInput()
+	{
+		_mouseMoves = glm::vec2(0);
+
+		while (SDL_PollEvent(&_event)) {
+			switch (_event.type) {
+			case SDL_MOUSEMOTION:
+				setMouseCoords(_event.motion.x, _event.motion.y);
+				setMouseMoves(_event.motion.xrel, _event.motion.yrel);
+				break;
+			case SDL_KEYDOWN:
+				pressKey(_event.key.keysym.sym);
+				break;
+			case SDL_KEYUP:
+				releaseKey(_event.key.keysym.sym);
+				break;
+			case SDL_MOUSEBUTTONDOWN:
+				pressKey(_event.button.button);
+				break;
+			case SDL_MOUSEBUTTONUP:
+				releaseKey(_event.button.button);
+				break;
+			default:
+				break;
+			}
+		}
 	}
 
 	//Met à jour la _previousKeyMap avec les valeurs de l'actuelle _keyMap.
@@ -60,5 +89,10 @@ namespace Engine
 		else { //s'il n'existe pas
 			return false;
 		}
+	}
+
+	bool InputManager::mouseMoved() const
+	{
+		return !(_mouseMoves == glm::vec2(0));
 	}
 }

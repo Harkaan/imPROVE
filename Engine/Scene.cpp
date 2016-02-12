@@ -4,8 +4,8 @@
 namespace Engine
 {
 	Scene::Scene() :
-		_windowWidth(1024),
-		_windowHeight(768),
+		_windowWidth(WINDOW_WIDTH),
+		_windowHeight(WINDOW_HEIGHT),
 		_shaders(),
 		_window(0),
 		_glContext(0)

@@ -3,7 +3,9 @@
 namespace Engine
 {
 	Structure::Structure(glm::vec3 position) :
-		_position(position)
+		_position(position),
+		_rng(_rd()),
+		_uni(1, 100)
 	{
 	}
 
@@ -31,5 +33,14 @@ namespace Engine
 	void Structure::clear()
 	{
 		_blocks.clear();
+	}
+
+	bool Structure::randomize(std::pair<glm::vec3, BlockType> dataPair, float proba)
+	{
+		if (_uni(_rng) < proba) {
+			_blockMap.push_back(dataPair);
+			return true;
+		}
+		return false;
 	}
 }

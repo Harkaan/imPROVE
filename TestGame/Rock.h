@@ -2,7 +2,6 @@
 
 #include <Engine\Structure.h>
 #include <glm\glm.hpp>
-#include <map>
 
 class Rock : public Engine::Structure
 {

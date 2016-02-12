@@ -21,21 +21,26 @@ namespace Engine
 	class Chunk
 	{	
 	public:
-		Chunk(glm::vec3 position, BlockType blocktype, float heightmap[CHUNK_SIZE * CHUNK_SIZE]);
+		Chunk(glm::vec3 position, BlockType blocktype, std::vector<float> heightmap);
 		~Chunk();
 
-		void addStructure(Structure* structure);
-		void addSprite(Sprite* sprite);
 		void init();
 		void clear();
 		void render();
 		void build();		
 		void draw();
 		void update();
+
+		void addStructure(Structure* structure);
+		void addSprite(Sprite* sprite);
+		void needsUpdate() { _isUpToDate = false; }
+		std::vector<Structure *> getStructures() { return _structures; }
+		std::vector<float> getHeightMap() { return _heightMap; }
+		static int noCase(int x, int y);
 	
 	private:
 		glm::vec3 _position;
-		float _heightMap[CHUNK_SIZE * CHUNK_SIZE];
+		std::vector<float> _heightMap;
 		bool _isUpToDate;
 		std::vector<Structure*> _structures;
 		std::vector<Block*> _groundBlocks;
@@ -49,8 +54,7 @@ namespace Engine
 		void createVertexArray();
 		void createSpriteBatches();
 		void sortSprites();
-		void addBlock(Block* block);
-		int noCase(int x, int y);
+		void addBlock(Block* block);		
 		static bool compareTexture(Sprite* a, Sprite* b);
 	};
 }

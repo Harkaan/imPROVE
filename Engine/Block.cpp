@@ -2,10 +2,12 @@
 #include "ResourceManager.h"
 #include "Chunk.h"
 
-const std::string TEXTURE_PATH_STONE = "Resources/stone.png";
-const std::string TEXTURE_PATH_GRASS = "Resources/grass.png";
-const std::string TEXTURE_PATH_WATER = "Resources/water.png";
-const std::string TEXTURE_PATH_EARTH = "Resources/earth.png";
+const std::string TEXTURE_PATH_STONE = "Resources/grey.png";
+const std::string TEXTURE_PATH_GRASS = "Resources/green.png";
+const std::string TEXTURE_PATH_WATER = "Resources/blue.png";
+const std::string TEXTURE_PATH_DIRT = "Resources/brown.png";
+const std::string TEXTURE_PATH_LEAF = "Resources/green2.png";
+const std::string TEXTURE_PATH_WOOD = "Resources/brown2.png";
 
 namespace Engine
 {
@@ -21,10 +23,18 @@ namespace Engine
 		}
 		else if (blockType == BlockType::Grass) {
 			upID = Engine::ResourceManager::getTexture(TEXTURE_PATH_GRASS).id;
-			otherID = Engine::ResourceManager::getTexture(TEXTURE_PATH_EARTH).id;
+			otherID = Engine::ResourceManager::getTexture(TEXTURE_PATH_DIRT).id;
 		}
 		else if (blockType == BlockType::Water) {
 			upID = Engine::ResourceManager::getTexture(TEXTURE_PATH_WATER).id;
+			otherID = upID;
+		}
+		else if (blockType == BlockType::Leaf) {
+			upID = Engine::ResourceManager::getTexture(TEXTURE_PATH_LEAF).id;
+			otherID = upID;
+		}
+		else if (blockType == BlockType::Wood) {
+			upID = Engine::ResourceManager::getTexture(TEXTURE_PATH_WOOD).id;
 			otherID = upID;
 		}
 

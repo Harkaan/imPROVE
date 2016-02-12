@@ -5,6 +5,9 @@
 #include <SDL\SDL.h>
 #include "Shader.h"
 
+const int WINDOW_WIDTH = 1024;
+const int WINDOW_HEIGHT = 768;
+
 namespace Engine
 {
 	class Scene

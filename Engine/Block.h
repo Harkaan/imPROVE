@@ -9,7 +9,9 @@ namespace Engine
 	{
 		Stone,
 		Grass,
-		Water
+		Water,
+		Leaf,
+		Wood
 	};
 
 	class Block

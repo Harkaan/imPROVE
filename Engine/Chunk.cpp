@@ -3,12 +3,13 @@
 
 namespace Engine
 {
-	Chunk::Chunk(glm::vec3 position, BlockType blocktype, float heightmap[CHUNK_SIZE * CHUNK_SIZE]) :
+	Chunk::Chunk(glm::vec3 position, BlockType blocktype, std::vector<float> heightmap) :
 		_position(position),
 		_isUpToDate(false),
 		_vbo(0), 
 		_vao(0)
 	{
+		_heightMap.resize(CHUNK_SIZE * CHUNK_SIZE);
 		for (int y = 0; y < CHUNK_SIZE; y++) {
 			for (int x = 0; x < CHUNK_SIZE; x++) {
 				for (int z = 0; z < heightmap[x + y] + position.z; z++) {
@@ -42,11 +43,6 @@ namespace Engine
 		_structures.push_back(structure);
 	}
 
-	void Chunk::addSprite(Sprite* sprite)
-	{
-		_sprites.push_back(*sprite);
-	}
-
 	void Chunk::init()
 	{
 		createVertexArray();
@@ -58,7 +54,7 @@ namespace Engine
 		_sprites.clear();
 	}
 
-	void Chunk::render()
+	void Chunk::build()
 	{
 		for (auto block : _groundBlocks) {
 			addBlock(block);
@@ -74,7 +70,7 @@ namespace Engine
 		}
 	}
 
-	void Chunk::build()
+	void Chunk::render()
 	{
 		_spritePointers.resize(_sprites.size());
 		for (int i = 0; i < _sprites.size(); i++) {
@@ -104,8 +100,8 @@ namespace Engine
 	{
 		if (!_isUpToDate) {
 			clear();
-			render();
 			build();
+			render();
 
 			_isUpToDate = true;
 		}
@@ -192,6 +188,11 @@ namespace Engine
 		addSprite(block->front);
 		addSprite(block->left);
 		addSprite(block->right);
+	}
+
+	void Chunk::addSprite(Sprite* sprite)
+	{
+		_sprites.push_back(*sprite);
 	}
 
 	// Retourne le numéro de la case de coordonnées (x,y) sur le chunk, compté dans l'ordre lexicographique (d'abord suivant x croissant, puis y croissant).

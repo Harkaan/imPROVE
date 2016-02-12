@@ -1,13 +1,13 @@
-﻿Build started 06/02/2016 10:35:21.
+﻿Build started 09/02/2016 20:06:11.
      1>Project "E:\Dev\GitHub\imPROVE\Engine\Engine.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          D:\Visual Studio\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Block.cpp Chunk.cpp Structure.cpp
          Block.cpp
          Chunk.cpp
-     1>Chunk.cpp(38): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
-     1>Chunk.cpp(79): warning C4018: '<' : signed/unsigned mismatch
-     1>Chunk.cpp(91): warning C4018: '<' : signed/unsigned mismatch
-     1>Chunk.cpp(126): warning C4018: '<' : signed/unsigned mismatch
+     1>Chunk.cpp(40): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>Chunk.cpp(81): warning C4018: '<' : signed/unsigned mismatch
+     1>Chunk.cpp(93): warning C4018: '<' : signed/unsigned mismatch
+     1>Chunk.cpp(139): warning C4018: '<' : signed/unsigned mismatch
          Structure.cpp
        Lib:
          D:\Visual Studio\VC\bin\Lib.exe /OUT:"E:\Dev\GitHub\imPROVE\Release\Engine.lib" SDL2.lib SDL2main.lib opengl32.lib glew32.lib /NOLOGO /LTCG Release\Block.obj
@@ -27,4 +27,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.34
+Time Elapsed 00:00:02.25

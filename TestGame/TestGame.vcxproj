@@ -87,10 +87,13 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Rock.cpp" />
+    <ClCompile Include="Tree.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameStructures.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="Rock.h" />
+    <ClInclude Include="Tree.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\blue.png" />

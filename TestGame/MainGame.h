@@ -4,6 +4,7 @@
 #include <Engine\Shader.h>
 #include <Engine\InputManager.h>
 #include <Engine\TextureCache.h>
+#include <Engine\Camera.h>
 
 enum class GameState {
 	PLAY,
@@ -22,10 +23,9 @@ public:
 private:
 	Engine::Scene _scene;
 	Engine::InputManager _inputManager;
+	Engine::Camera _camera;
 	GameState _gameState;
-	float _theta;
 
 	void gameLoop();
-	void processInput();
-	void processBasicCamera();
+	void checkEnd();
 };
