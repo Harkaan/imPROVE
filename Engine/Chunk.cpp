@@ -1,5 +1,6 @@
 #include "Chunk.h"
 #include <algorithm>
+#include <iostream>
 
 namespace Engine
 {
@@ -9,11 +10,15 @@ namespace Engine
 		_vbo(0), 
 		_vao(0)
 	{
+<<<<<<< HEAD
 		_heightMap.resize(CHUNK_SIZE * CHUNK_SIZE);
+=======
+		bool spritesLoaded[6] = {false, true, false, false, false, false};
+>>>>>>> origin/master
 		for (int y = 0; y < CHUNK_SIZE; y++) {
 			for (int x = 0; x < CHUNK_SIZE; x++) {
 				for (int z = 0; z < heightmap[x + y] + position.z; z++) {
-					_groundBlocks.emplace_back(new Block(glm::vec3(x + position.x, y + position.y, z), blocktype));
+					_groundBlocks.push_back(new Block(glm::vec3(x + position.x, y + position.y, z), spritesLoaded, blocktype));
 				}
 				_heightMap[noCase(x, y)] = heightmap[noCase(x, y)];
 			}
@@ -151,7 +156,7 @@ namespace Engine
 		}
 
 		glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-		glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), nullptr, GL_DYNAMIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), nullptr, GL_STATIC_DRAW);
 		glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size() * sizeof(Vertex), vertices.data());
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
@@ -182,12 +187,9 @@ namespace Engine
 
 	void Chunk::addBlock(Block * block)
 	{
-		addSprite(block->up);
-		addSprite(block->bottom);
-		addSprite(block->back);
-		addSprite(block->front);
-		addSprite(block->left);
-		addSprite(block->right);
+		for (int i = 0; i < block->sprites.size(); i++) {
+			addSprite(block->sprites[i]);
+		}
 	}
 
 	void Chunk::addSprite(Sprite* sprite)

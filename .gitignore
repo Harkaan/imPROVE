@@ -1,0 +1,12 @@
+*.obj
+*.log
+*.lastbuildstate
+*.idb
+*.obj
+*.obj
+*.obj
+*.lastbuildstate
+*.obj
+*.tlog
+Engine/Debug/Engine.tlog/Lib-link.write.1.tlog
+*.tlog
