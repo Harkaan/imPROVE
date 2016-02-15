@@ -3,21 +3,12 @@
 #include "Chunk.h"
 #include <iostream>
 
-<<<<<<< HEAD
 const std::string TEXTURE_PATH_STONE = "Resources/grey.png";
 const std::string TEXTURE_PATH_GRASS = "Resources/green.png";
 const std::string TEXTURE_PATH_WATER = "Resources/blue.png";
 const std::string TEXTURE_PATH_DIRT = "Resources/brown.png";
 const std::string TEXTURE_PATH_LEAF = "Resources/green2.png";
 const std::string TEXTURE_PATH_WOOD = "Resources/brown2.png";
-=======
-const std::string TEXTURE_PATH_STONE = "Resources/stone.png";
-const std::string TEXTURE_PATH_GRASS = "Resources/grass.png";
-const std::string TEXTURE_PATH_WATER = "Resources/water.png";
-const std::string TEXTURE_PATH_EARTH = "Resources/earth.png";
-const std::string TEXTURE_PATH_WOOD = "Resources/wood.png";
-const std::string TEXTURE_PATH_LEAVES = "Resources/leaves.png";
->>>>>>> origin/master
 
 namespace Engine
 {
@@ -39,52 +30,12 @@ namespace Engine
 			upID = Engine::ResourceManager::getTexture(TEXTURE_PATH_WATER).id;
 			otherID = upID;
 		}
-<<<<<<< HEAD
 		else if (blockType == BlockType::Leaf) {
 			upID = Engine::ResourceManager::getTexture(TEXTURE_PATH_LEAF).id;
 			otherID = upID;
 		}
-=======
->>>>>>> origin/master
 		else if (blockType == BlockType::Wood) {
 			upID = Engine::ResourceManager::getTexture(TEXTURE_PATH_WOOD).id;
-			otherID = upID;
-		}
-<<<<<<< HEAD
-
-		bottom = new Sprite({	glm::vec3(0 + position.x, 0 + position.y, 0 + position.z),
-								glm::vec3(1 + position.x, 0 + position.y, 0 + position.z),
-								glm::vec3(0 + position.x, 1 + position.y, 0 + position.z),
-								glm::vec3(1 + position.x, 1 + position.y, 0 + position.z) },
-								color, { 0, 0, 1, 1 }, otherID);
-		up = new Sprite({		glm::vec3(0 + position.x, 0 + position.y, 1 + position.z),
-								glm::vec3(1 + position.x, 0 + position.y, 1 + position.z),
-								glm::vec3(0 + position.x, 1 + position.y, 1 + position.z),
-								glm::vec3(1 + position.x, 1 + position.y, 1 + position.z) }, 
-								color, { 0, 0, 1, 1 }, upID);
-		back = new Sprite({		glm::vec3(0 + position.x, 0 + position.y, 0 + position.z),
-								glm::vec3(1 + position.x, 0 + position.y, 0 + position.z),
-								glm::vec3(0 + position.x, 0 + position.y, 1 + position.z),
-								glm::vec3(1 + position.x, 0 + position.y, 1 + position.z) },
-								color, { 0, 0, 1, 1 }, otherID);
-		front = new Sprite({	glm::vec3(0 + position.x, 1 + position.y, 0 + position.z),
-								glm::vec3(1 + position.x, 1 + position.y, 0 + position.z),
-								glm::vec3(0 + position.x, 1 + position.y, 1 + position.z),
-								glm::vec3(1 + position.x, 1 + position.y, 1 + position.z) },
-								color, { 0, 0, 1, 1 }, otherID);
-		left = new Sprite({		glm::vec3(0 + position.x, 0 + position.y, 0 + position.z),
-								glm::vec3(0 + position.x, 1 + position.y, 0 + position.z),
-								glm::vec3(0 + position.x, 0 + position.y, 1 + position.z),
-								glm::vec3(0 + position.x, 1 + position.y, 1 + position.z) },
-								color, { 0, 0, 1, 1 }, otherID);
-		right = new Sprite({	glm::vec3(1 + position.x, 0 + position.y, 0 + position.z),
-								glm::vec3(1 + position.x, 1 + position.y, 0 + position.z),
-								glm::vec3(1 + position.x, 0 + position.y, 1 + position.z),
-								glm::vec3(1 + position.x, 1 + position.y, 1 + position.z) },
-								color, { 0, 0, 1, 1 }, otherID);
-=======
-		else if (blockType == BlockType::Leaves) {
-			upID = Engine::ResourceManager::getTexture(TEXTURE_PATH_LEAVES).id;
 			otherID = upID;
 		}
 		
@@ -136,7 +87,6 @@ namespace Engine
 										 color, { 0, 0, 1, 1 }, otherID);
 			sprites.push_back(right);
 		}
->>>>>>> origin/master
 	}
 
 	Block::~Block()

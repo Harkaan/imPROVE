@@ -12,13 +12,8 @@ namespace Engine
 		Stone,
 		Grass,
 		Water,
-<<<<<<< HEAD
 		Leaf,
 		Wood
-=======
-		Wood,
-		Leaves
->>>>>>> origin/master
 	};
 
 	class Block

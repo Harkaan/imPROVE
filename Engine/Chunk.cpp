@@ -10,11 +10,11 @@ namespace Engine
 		_vbo(0), 
 		_vao(0)
 	{
-<<<<<<< HEAD
+
 		_heightMap.resize(CHUNK_SIZE * CHUNK_SIZE);
-=======
+
 		bool spritesLoaded[6] = {false, true, false, false, false, false};
->>>>>>> origin/master
+
 		for (int y = 0; y < CHUNK_SIZE; y++) {
 			for (int x = 0; x < CHUNK_SIZE; x++) {
 				for (int z = 0; z < heightmap[x + y] + position.z; z++) {

@@ -24,8 +24,9 @@ namespace Engine
 		}
 	}
 
-	void Structure::build() //Cette fonction va créer un tableau 3D contenant, pour chaque coordonnée, le type de bloc que contient la structure (Void s'il n'y a rien).
-							//Puis elle va utiliser ce tableau pour que chacun des blocs ne soit créer qu'avec le nombre minimum de face.
+	//Cette fonction va créer un tableau 3D contenant, pour chaque coordonnée, le type de bloc que contient la structure (Void s'il n'y a rien).
+	//Puis elle va utiliser ce tableau pour que chacun des blocs ne soit créé qu'avec le nombre minimum de faces.
+	void Structure::build() 
 	{
 		int minX = _blockMap[0].first.x, minY = _blockMap[0].first.y, minZ = _blockMap[0].first.z, maxX = minX, maxY = minY, maxZ = minZ; 
 		for (auto temp : _blockMap) {

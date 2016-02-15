@@ -1,12 +1,10 @@
-﻿Build started 10/02/2016 11:10:40.
+﻿Build started 14/02/2016 15:08:38.
      1>Project "E:\Dev\GitHub\imPROVE\Engine\Engine.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         D:\Visual Studio\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Block.cpp
-         Block.cpp
-       Lib:
+     1>Lib:
          D:\Visual Studio\VC\bin\Lib.exe /OUT:"E:\Dev\GitHub\imPROVE\Debug\Engine.lib" SDL2.lib SDL2main.lib opengl32.lib glew32.lib /NOLOGO Debug\Block.obj
          Debug\Camera.obj
          Debug\Chunk.obj
+         Debug\FrustrumCulling.obj
          Debug\InputManager.obj
          Debug\picoPNG.obj
          Debug\ResourceManager.obj
@@ -24,4 +22,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.85
+Time Elapsed 00:00:00.68
