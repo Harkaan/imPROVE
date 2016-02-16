@@ -5,7 +5,7 @@
 class Tree : public Engine::Structure
 {
 public:
-	Tree(glm::vec3 position);
+	Tree(glm::vec3 position, int treeType);
 	~Tree();
 };
 
