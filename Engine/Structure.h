@@ -16,6 +16,7 @@ namespace Engine
 		void build();
 		void clear();
 		bool randomize(std::pair<glm::vec3, BlockType>, float proba);
+		bool addBlock(float x, float y, float z, BlockType blocktype, float proba = 100);
 
 		void setPosition(glm::vec3 position) { _position = position; }
 		glm::vec3 getPosition() { return _position; }

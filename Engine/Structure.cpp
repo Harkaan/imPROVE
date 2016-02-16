@@ -104,4 +104,9 @@ namespace Engine
 		}
 		return false;
 	}
+
+	bool Structure::addBlock(float x, float y, float z, BlockType blocktype, float proba = 100)
+	{
+		randomize(std::make_pair(glm::vec3(x, y, z), blocktype), proba);
+	}
 }
