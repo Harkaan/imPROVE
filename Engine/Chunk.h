@@ -21,7 +21,7 @@ namespace Engine
 	class Chunk
 	{	
 	public:
-		Chunk(glm::vec3 position, BlockType blocktype, std::vector<float> heightmap);
+		Chunk(glm::vec3 position, int** heightMap);
 		~Chunk();
 
 		void init();
@@ -35,15 +35,14 @@ namespace Engine
 		void addSprite(Sprite* sprite);
 		void needsUpdate() { _isUpToDate = false; }
 		std::vector<Structure *> getStructures() { return _structures; }
-		std::vector<float> getHeightMap() { return _heightMap; }
+		//std::vector<float> getHeightMap() { return _heightMap; }
 		static int noCase(int x, int y);
 	
 	private:
 		glm::vec3 _position;
-		std::vector<float> _heightMap;
+		int** _heightMap;
 		bool _isUpToDate;
 		std::vector<Structure*> _structures;
-		std::vector<Block*> _groundBlocks;
 
 		GLuint _vbo;
 		GLuint _vao;

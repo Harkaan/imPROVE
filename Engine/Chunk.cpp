@@ -4,23 +4,19 @@
 
 namespace Engine
 {
-	Chunk::Chunk(glm::vec3 position, BlockType blocktype, std::vector<float> heightmap) :
+	Chunk::Chunk(glm::vec3 position, int** heightMap) :
 		_position(position),
 		_isUpToDate(false),
 		_vbo(0), 
 		_vao(0)
 	{
-
-		_heightMap.resize(CHUNK_SIZE * CHUNK_SIZE);
-
-		bool spritesLoaded[6] = {false, true, false, false, false, false};
-
-		for (int y = 0; y < CHUNK_SIZE; y++) {
-			for (int x = 0; x < CHUNK_SIZE; x++) {
-				for (int z = 0; z < heightmap[x + y] + position.z; z++) {
-					_groundBlocks.push_back(new Block(glm::vec3(x + position.x, y + position.y, z), spritesLoaded, blocktype));
-				}
-				_heightMap[noCase(x, y)] = heightmap[noCase(x, y)];
+		_heightMap = new int*[CHUNK_SIZE];
+		for (int i = 0; i < CHUNK_SIZE; i++)
+		{
+			_heightMap[i] = new int[CHUNK_SIZE];
+			for (int j = 0; j < CHUNK_SIZE; j++)
+			{
+				_heightMap[i][j] = heightMap[i+1][j+1];
 			}
 		}
 	}
@@ -30,10 +26,10 @@ namespace Engine
 		for (Structure* temp : _structures) {
 			delete temp;
 		}
-
-		for (Block* temp : _groundBlocks) {
-			delete temp;
+		for (int i = 0; i < CHUNK_SIZE; i++) {
+			delete _heightMap[i];
 		}
+		delete _heightMap;
 
 		glDeleteBuffers(1, &_vbo);
 		glDeleteVertexArrays(1, &_vao);
@@ -42,9 +38,12 @@ namespace Engine
 	void Chunk::addStructure(Structure* structure)
 	{
 		glm::vec3 structPosition = structure->getPosition();
-		int structCase = noCase(structPosition.x, structPosition.y);
-
-		structure->setPosition(structPosition + _position + glm::vec3(0, 0, _heightMap[structCase]));
+		if (structure->isGround()) {
+			structure->setPosition(_position);
+		}
+		else {
+			structure->setPosition(structPosition + _position + glm::vec3(0, 0, _heightMap[int(structPosition.x)][int(structPosition.y)]));
+		}
 		_structures.push_back(structure);
 	}
 
@@ -61,10 +60,6 @@ namespace Engine
 
 	void Chunk::build()
 	{
-		for (auto block : _groundBlocks) {
-			addBlock(block);
-		}
-
 		for (auto structure : _structures) {
 			structure->clear();
 			structure->build();
@@ -195,13 +190,6 @@ namespace Engine
 	void Chunk::addSprite(Sprite* sprite)
 	{
 		_sprites.push_back(*sprite);
-	}
-
-	// Retourne le numéro de la case de coordonnées (x,y) sur le chunk, compté dans l'ordre lexicographique (d'abord suivant x croissant, puis y croissant).
-	// NB : La première case a le numéro 0.
-	int Chunk::noCase(int x, int y)
-	{
-		return CHUNK_SIZE * y + x;
 	}
 
 	void Chunk::sortSprites()

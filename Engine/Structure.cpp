@@ -6,7 +6,8 @@ namespace Engine
 	Structure::Structure(glm::vec3 position) :
 		_position(position),
 		_rng(_rd()),
-		_uni(1, 100)
+		_uni(1, 100),
+		_isGround(false)
 	{
 	}
 

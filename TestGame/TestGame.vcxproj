@@ -84,14 +84,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Ground.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="PerlinNoise.cpp" />
     <ClCompile Include="Rock.cpp" />
     <ClCompile Include="Tree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameStructures.h" />
+    <ClInclude Include="Ground.h" />
     <ClInclude Include="MainGame.h" />
+    <ClInclude Include="PerlinNoise.h" />
     <ClInclude Include="Rock.h" />
     <ClInclude Include="Tree.h" />
   </ItemGroup>

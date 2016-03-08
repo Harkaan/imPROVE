@@ -17,6 +17,7 @@ namespace Engine
 		void clear();
 		bool randomize(std::pair<glm::vec3, BlockType>, float proba);
 		bool addBlock(float x, float y, float z, BlockType blocktype, float proba = 100);
+		bool isGround() { return _isGround; };
 
 		void setPosition(glm::vec3 position) { _position = position; }
 		glm::vec3 getPosition() { return _position; }
@@ -30,6 +31,8 @@ namespace Engine
 		std::random_device _rd;
 		std::mt19937 _rng;
 		std::uniform_int_distribution<int> _uni;
+
+		bool _isGround;
 	};
 }
 

@@ -7,6 +7,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include "PerlinNoise.h"
 
 MainGame::MainGame() :
 	_gameState(GameState::PLAY)
@@ -35,39 +36,39 @@ void MainGame::init()
 // Boucle dans laquelle vit le jeu.
 void MainGame::gameLoop()
 {
+	int m_tailleChunk = 16;
 	GLuint frameRate(1000 / 70);
 	Uint32 startTicks(0), endTicks(0), elapsedTime(0), startFpsTicks(0), endFpsTicks(0);
 	int steps(0);
 
 	Engine::Shader* shader = new Engine::Shader();
-
-	std::vector<float> heightmap = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-									1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-									1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-									1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-									1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-									1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-									1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-									1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-									1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-									1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-									1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-									1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-									1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-									1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-									1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-									1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+	PerlinNoise::initPerlinNoise(15);
 
 	//Hard test
 	std::vector<Engine::Chunk*> chunks;
-	for(int i = 0; i < 32; i++) {
-		for (int j = 0; j < 32; j++) {
-			Engine::Chunk* chunk = new Engine::Chunk(glm::vec3(i*16 , j*16, 0), Engine::BlockType::Grass, heightmap);
+	for(int i = 0; i < 16; i++) {
+		for (int j = 0; j < 16; j++) {
+			int **heightMap;
+			heightMap = new int*[m_tailleChunk + 2];
+			for (int i1 = 0; i1 < m_tailleChunk + 2; i1++)
+			{
+				heightMap[i1] = new int[m_tailleChunk + 2];
+				for (int j1 = 0; j1 < m_tailleChunk + 2; j1++)
+				{
+					heightMap[i1][j1] = int(1000 * PerlinNoise::getPerlinNoise(i1 + i*m_tailleChunk - 1, j1 + j*m_tailleChunk - 1, 10000) + 100 * PerlinNoise::getPerlinNoise(i1 + i*m_tailleChunk - 1, j1 + j*m_tailleChunk - 1, 200));
+				}
+			}
+			Engine::Chunk* chunk = new Engine::Chunk(glm::vec3(i*m_tailleChunk, j*m_tailleChunk, 0), heightMap);
+			chunk->addStructure(new Ground(heightMap));
 			chunk->addStructure(new Rock(glm::vec3(2, 6, 0)));
 			chunk->addStructure(new Rock(glm::vec3(7, 12, 0)));
 			chunk->addStructure(new Tree(glm::vec3(6, 2, 0), rand()%2));
 			chunk->init();
 			chunks.emplace_back(chunk);
+			for (int i = 0; i < m_tailleChunk + 2; i++) {
+				delete heightMap[i];
+			}
+			delete heightMap;
 		}
 	}
 
