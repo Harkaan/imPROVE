@@ -13,7 +13,8 @@ namespace Engine
 		Grass,
 		Water,
 		Leaf,
-		Wood
+		Wood,
+		Source
 	};
 
 	class Block

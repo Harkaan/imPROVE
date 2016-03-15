@@ -90,6 +90,7 @@
     <ClCompile Include="PerlinNoise.cpp" />
     <ClCompile Include="Rock.cpp" />
     <ClCompile Include="Tree.cpp" />
+    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameStructures.h" />
@@ -98,6 +99,7 @@
     <ClInclude Include="PerlinNoise.h" />
     <ClInclude Include="Rock.h" />
     <ClInclude Include="Tree.h" />
+    <ClInclude Include="Source.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\blue.png" />

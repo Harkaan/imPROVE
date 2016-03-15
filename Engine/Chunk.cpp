@@ -192,6 +192,15 @@ namespace Engine
 		_sprites.push_back(*sprite);
 	}
 
+	void Chunk::timeStep()
+	{
+		for (auto structure : _structures) {
+			if (structure->timeStep()) {
+				_isUpToDate = false;
+			}
+		}
+	}
+
 	void Chunk::sortSprites()
 	{
 		std::stable_sort(_spritePointers.begin(), _spritePointers.end(), compareTexture);

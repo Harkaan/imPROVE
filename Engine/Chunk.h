@@ -30,13 +30,15 @@ namespace Engine
 		void build();		
 		void draw();
 		void update();
+		void timeStep();
 
 		void addStructure(Structure* structure);
 		void addSprite(Sprite* sprite);
 		void needsUpdate() { _isUpToDate = false; }
 		std::vector<Structure *> getStructures() { return _structures; }
+		glm::vec3 getPosition() { return _position; }
 		//std::vector<float> getHeightMap() { return _heightMap; }
-		static int noCase(int x, int y);
+		//static int noCase(int x, int y);
 	
 	private:
 		glm::vec3 _position;

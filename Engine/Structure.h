@@ -18,10 +18,12 @@ namespace Engine
 		bool randomize(std::pair<glm::vec3, BlockType>, float proba);
 		bool addBlock(float x, float y, float z, BlockType blocktype, float proba = 100);
 		bool isGround() { return _isGround; };
+		virtual bool timeStep() { return false; }
 
 		void setPosition(glm::vec3 position) { _position = position; }
 		glm::vec3 getPosition() { return _position; }
 		std::vector<Block *> getBlocks() { return _blocks; }
+		std::vector < std::pair<glm::vec3, BlockType> > getBlockMap() { return _blockMap; }
 
 	protected:
 		glm::vec3 _position;

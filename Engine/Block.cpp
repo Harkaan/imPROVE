@@ -38,6 +38,10 @@ namespace Engine
 			upID = Engine::ResourceManager::getTexture(TEXTURE_PATH_WOOD).id;
 			otherID = upID;
 		}
+		else if (blockType == BlockType::Source) {
+			upID = Engine::ResourceManager::getTexture(TEXTURE_PATH_WATER).id;
+			otherID = upID;
+		}
 		
 		if (spritesLoaded[0]) {
 			Sprite *bottom = new Sprite({ glm::vec3(0 + position.x, 0 + position.y, 0 + position.z),
